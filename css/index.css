@@ -1,0 +1,414 @@
+/* --- 1. RESET Y VARIABLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --bg-dark: #0b0d13;
+    --text-white: #ffffff;
+    --blue-neon: #00d2ff;
+    --blue-glow: rgba(0, 210, 255, 0.3);
+    --blue-normal: rgb(81, 136, 253);
+    --gold: #ffd700;
+    --gold-glow: rgba(255, 215, 0, 0.4);
+}
+
+/* --- 2. DISEÑO GENERAL --- */
+.custom-bg {
+    background: linear-gradient(rgba(11, 13, 19, 0.85), rgba(11, 13, 19, 0.95)), 
+                url('../assets/Fondos/fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo { font-weight: 800; font-size: 1.5rem; }
+
+nav a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover, nav a.active {
+    color: var(--blue-neon);
+    text-shadow: 0 0 8px var(--blue-glow);
+}
+
+/* --- 3. PANTALLA DE BIENVENIDA (INDEX) --- */
+.welcome-screen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.welcome-box {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(200, 220, 255, 0.1);
+    padding: 50px 40px;
+    border-radius: 24px;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px var(--blue-glow);
+}
+
+.welcome-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--text-white);
+}
+
+.btn-enter {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--bg-dark);
+    background: linear-gradient(45deg, #ffffff, var(--blue-neon));
+    font-weight: 700;
+    padding: 16px 45px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px var(--blue-glow);
+    transition: 0.3s;
+}
+
+/* --- 4. SOBRE Y APERTURA (HOME) --- */
+.pack-card {
+    width: 280px;  /* Antes era 220px */
+    height: 390px; /* Antes era 310px */
+    border: 3px solid var(--gold);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.1s ease;
+}
+
+.pack-img-content { width: 100%; height: 100%; object-fit: cover; }
+
+#cards-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card-new {
+    width: 140px;
+    height: 200px;
+    background: var(--bg-dark);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    animation: cardAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+/* --- 5. EL ÁLBUM (ESTILO LIBRO) --- */
+.album-book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.book-interface {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+}
+
+.book {
+    display: flex;
+    width: 900px;
+    height: 550px;
+    background: #1a1c23;
+    border: 8px solid #000;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-page {
+    flex: 1;
+    background: linear-gradient(to right, #1e2029, #252833);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Fijo, sin scroll */
+}
+
+.book-spine {
+    width: 20px;
+    background: linear-gradient(to right, #000, #333, #000);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Grilla y Slots del Álbum */
+.album-grid-book {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.album-slot {
+    width: 100%;
+    height: 100%;
+    max-height: 220px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+}
+
+.album-slot img {
+    width: 100%;
+    height: calc(100% - 25px);
+    object-fit: contain;
+    padding: 5px;
+    transition: 0.5s;
+}
+
+.album-slot.owned {
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* Textos dentro del Slot */
+.slot-name {
+    font-size: 0.65rem;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    width: 100%;
+    padding: 2px 0;
+    text-align: center;
+    z-index: 2;
+}
+
+.slot-count {
+    position: absolute;
+    bottom: 18px;
+    right: 5px;
+    background: var(--blue-neon);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 1px 5px;
+    border-radius: 5px;
+    z-index: 3;
+}
+
+.slot-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgba(255, 215, 0, 0.1);
+    z-index: 0;
+}
+
+/* --- 6. BOTONES Y UTILIDADES --- */
+.btn-side {
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    font-size: 2rem;
+    padding: 20px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-side:hover {
+    background: var(--gold);
+    color: black;
+    box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.title-glow { font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 15px var(--blue-glow); }
+.highlight-blue { color: var(--blue-neon); }
+.hidden { display: none; }
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: translateY(50px) scale(0.5); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Contenedor para alinear flechas y libro */
+.book-interface {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Botones laterales */
+.btn-side {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    padding: 20px 15px;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Evitar que las imágenes se salgan del slot */
+.album-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Esto hace que la figu se adapte sin estirarse */
+    display: block;
+}
+
+.album-grid-book {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    height: 100%; /* Ocupa toda la carilla */
+}
+
+/* Contenedor principal del Home */
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly; /* Distribuye el espacio parejo */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Área donde vive el sobre */
+.pack-display-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px; /* Le subimos de 350px a 420px */
+}
+
+.pack-card {
+    width: 350px; /* Un poquito más chico para que entre en cualquier pantalla */
+    height: 500px;
+    border: 3px solid var(--gold);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.1s ease;
+}
+
+/* Imagen del sobre para que no se deforme */
+.pack-img-content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre el área sin estirarse raro */
+}
+
+/* Botón de abrir */
+.btn-primary {
+    background: linear-gradient(45deg, #ffffff, #83f3f7);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    color: rgb(33, 54, 68);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(11, 59, 45, 0.4);
+    transition: 0.3s;
+}
+
+.btn-primaryy {
+    background: linear-gradient(45deg, #ffffff, #83f3f7);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    color: rgb(97, 50, 50);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(153, 43, 43, 0.4);
+    transition: 0.3s;
+}
+
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(46, 76, 212, 0.6);
+}
+
+#cards-display {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px; /* Espacio para que no pisen el sobre */
+    width: 100%;
+}
+
+.card-new {
+    width: 130px;
+    height: 180px;
+    background: var(--bg-dark);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    /* Esta es la animación que definimos antes */
+    animation: cardAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+.card-new img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Para que tus personajes de Sekai se vean enteros */
+    padding: 5px;
+}
+
+#click-area img {
+    transition: transform 0.1s;
+    filter: drop-shadow(0 0 5px var(--blue-glow));
+}
+#click-area:active img {
+    transform: scale(0.8);
+}

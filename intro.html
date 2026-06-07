@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiguWorld | Bienvenida</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .intro-body {
+            background: black;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #active-scene-img,
+        #scene-text {
+            transition: opacity 0.4s ease-in-out;
+            opacity: 1;
+        }
+
+        .fade-out {
+            opacity: 0 !important;
+        }
+
+        .scene-container {
+            max-width: 700px;
+            width: 90%;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .scene-frame {
+            border: 3px solid var(--blue-neon);
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--blue-glow);
+            background-color: #111;
+            /* Fondo por si tarda en cargar la img */
+        }
+
+        .scene-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+
+        #scene-text {
+            font-size: 1.4rem;
+            min-height: 80px;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="intro-body">
+
+    <div class="scene-container">
+        <div class="scene-frame">
+            <img id="active-scene-img" src="" alt="Historia">
+        </div>
+        <p id="scene-text"></p>
+
+        <div class="actions">
+            <button id="btn-next" class="btn-primary">SIGUIENTE</button>
+            <a href="home.html" id="btn-skip" class="btn-primary" style="display: none; text-decoration: none;">OBTENER
+                MI ÁLBUM</a>
+        </div>
+    </div>
+
+    <script>
+        const escenas = [
+            { img: "assets/figuritas/.extra/reporte.gif", text: "Si probaste esta app es porque la compartí a personas cercanas o porque por fin compré un dominio." },
+            { img: "assets/figuritas/.extra/3e.jpg", text: "En un mundo donde la esperanza se perdió en esos gachas..." },
+            { img: "assets/figuritas/.extra/prog.jfif", text: "Y de una programadora que soñaba con crear una app de pjsk..." },
+            { img: "assets/figuritas/.extra/triple pjsk.webp", text: "Presentamos FiguWorld" },
+            { img: "assets/figuritas/.extra/triste.gif", text: "Entiendo que estuviste triste por farmear tanto y jamás lograste tener esa carta." },
+            { img: "assets/figuritas/.extra/kanade.gif", text: "¿Si los del mundial tienen álbumes, por qué los bodrio sekianos no?" },
+            { img: "assets/figuritas/.extra/ODO.gif", text: "¡Siéntete libre de reportar errores, espero disfrutes!" },
+        ];
+
+        let index = 0;
+        const imgEle = document.getElementById('active-scene-img');
+        const txtEle = document.getElementById('scene-text');
+        const btnNext = document.getElementById('btn-next');
+        const btnSkip = document.getElementById('btn-skip');
+
+        function actualizarEscena() {
+            // 1. Aplicamos la clase para oscurecer
+            imgEle.classList.add('fade-out');
+            txtEle.classList.add('fade-out');
+
+            // 2. Esperamos a que termine la transición de oscurecer (400ms)
+            setTimeout(() => {
+                imgEle.src = escenas[index].img;
+                txtEle.textContent = escenas[index].text;
+
+                // 3. Quitamos la clase para que aparezca la nueva imagen
+                imgEle.classList.remove('fade-out');
+                txtEle.classList.remove('fade-out');
+
+                // Manejo de botones
+                if (index === escenas.length - 1) {
+                    btnNext.style.display = "none";
+                    btnSkip.style.display = "inline-block";
+                }
+            }, 400);
+        }
+
+        // Inicializar la primera escena sin delay
+        imgEle.src = escenas[0].img;
+        txtEle.textContent = escenas[0].text;
+
+        btnNext.addEventListener('click', () => {
+            if (index < escenas.length - 1) {
+                index++;
+                actualizarEscena();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiguWorld | Misiones</title>
+    <link rel="stylesheet" href="css/misiones.css">
+    <style>
+        /* Variables de respaldo por si tu index.css no carga */
+        :root {
+            --blue-neon: #00f3ff;
+            --blue-glow: rgba(0, 243, 255, 0.8);
+        }
+        body {
+            background-color: #0a0a0a;
+            color: white;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="missions-container">
+        <h1 class="title-glow">CENTRO DE RECOMPENSAS</h1>
+
+        <div class="mission-card clicker-special">
+            <div class="mission-info">
+                <h3>Tap Tap Cristal</h3>
+                <p>¡Ganás 1 cristal por cada click!</p>
+            </div>
+            <div id="click-area" class="crystal-tap" style="cursor: pointer;">
+                <img src="assets/crystal.webp" alt="Cristal" width="50">
+            </div>
+            <div class="mission-reward" id="session-coins">+0 esta sesión</div>
+        </div>
+
+        <div class="mission-card" style="flex-direction: column; align-items: stretch;">
+            <div class="mission-info" style="margin-bottom: 20px;">
+                <h3>Cine de Cristales</h3>
+                <p>Mirá el video completo para ganar 100 cristales.</p>
+            </div>
+            
+            <div id="video-list" class="video-playlist"></div>
+        </div>
+    </div>
+
+    <div id="video-player-overlay">
+        <div class="video-wrapper">
+            <span class="close-video" id="close-video">CERRAR [X]</span>
+            <video id="main-video" width="100%" controls controlsList="nodownload"></video>
+        </div>
+        <h2 id="playing-title" style="color: white; margin-top: 20px; text-align:center;"></h2>
+    </div>
+
+    <script src="js/misiones.js"></script>
+</body>
+</html>

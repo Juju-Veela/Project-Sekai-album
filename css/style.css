@@ -1,0 +1,194 @@
+/* Reset y variables de color */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+:root {
+    --bg-primary: #0a0b10;
+    --accent: #ff007f;
+    --accent-glow: rgba(255, 0, 127, 0.4);
+    --text-main: #ffffff;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fondo animado de luces intermitentes */
+.bg-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 20% 30%, #4a00e0 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, var(--accent) 0%, transparent 40%);
+    z-index: -1;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: gradientMove 10s ease infinite alternate;
+}
+
+@keyframes gradientMove {
+    0% { transform: scale(1) translate(0px, 0px); }
+    100% { transform: scale(1.2) translate(30px, -30px); }
+}
+
+/* Header / Navegación */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Contenedor Principal */
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 30px;
+}
+
+/* Títulos */
+.title-glow {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #fff, #ff007f);
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 0, 127, 0.2);
+    text-align: center;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* El Sobre 3D (Efecto de inclinación) */
+.pack-wrapper {
+    perspective: 1000px; /* Necesario para el efecto 3D */
+}
+
+.pack-card {
+    width: 220px;
+    height: 320px;
+    background: linear-gradient(135deg, #1e1e2f 0%, #0f0f15 100%);
+    border: 3px solid #ff007f;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.pack-texture {
+    width: 90%;
+    height: 93%;
+    border: 1px dashed rgba(255, 0, 127, 0.5);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateZ(30px); /* Saca el texto "hacia afuera" */
+}
+
+.pack-badge {
+    position: absolute;
+    top: 15px;
+    background: #ff007f;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.pack-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0px #4a00e0;
+}
+
+.pack-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 5px;
+}
+
+/* Botones y Stats */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #ff007f, #7928ca);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 0, 127, 0.6);
+}
+
+.stats {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffd700;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiguWorld | Mi Álbum</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body class="custom-bg">
+
+    <header>
+        <div class="logo">✨ Figu<span class="highlight-blue">World</span></div>
+        <nav>
+            <a href="home.html">Inicio</a>
+            <a href="album.html" class="active">Mi Álbum</a>
+        </nav>
+    </header>
+
+    <main class="album-book-container">
+        <h1 class="title-glow" id="album-title">MI COLECCIÓN</h1>
+
+        <div class="book-interface"> <button id="prev-page" class="btn-side">⬅</button>
+
+            <div class="book" id="album-book">
+                <div class="book-page left-page">
+                    <div id="grid-left" class="album-grid-book"></div>
+                </div>
+                <div class="book-spine"></div>
+                <div class="book-page right-page">
+                    <div id="grid-right" class="album-grid-book"></div>
+                </div>
+            </div>
+
+            <button id="next-page" class="btn-side">➡</button>
+        </div>
+
+        <p class="page-indicator">Página <span id="current-page-num">1</span></p>
+        <br>
+        <button id="btn-reset" class="btn btn-primaryy">Reiniciar Colección</button>
+    </main>
+
+    <audio id="bg-music" loop>
+        <source src="assets/musica/album_theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
